@@ -1,0 +1,67 @@
+// Course:  CPS 501
+// Semester: 2021 Fall
+// Name: SOWMYA KOTHWALGUDEM
+// Section: 10
+// Assignment: 01
+// Purpose: A basic program to calculate a Fast Food Check using scanner class
+// Date completed: 08/27/2021
+package lab01;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author sowmya
+ */
+public class Lab01 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        // Scanner attached to keyboard
+        Scanner cin = new Scanner(System.in);
+
+        // variables
+        double burger = 0, fries = 0, drink = 0;    // input data
+        double tax, totalFood, totalDue;            // calculated
+        
+        // constant
+        final double TAX_RATE = 0.075; // Montgomery County
+        
+        // dialog with user (Add more interaction for fries and drink prices)
+        System.out.print("Enter Burger price: ");
+        burger = cin.nextDouble();
+        System.out.print("Enter Fries price: ");
+        fries=cin.nextDouble();
+        System.out.print("Enter Drink price: ");
+        drink=cin.nextDouble();
+        
+        totalFood = burger+fries+drink;
+        tax = totalFood*TAX_RATE;
+        totalDue = totalFood+tax;
+        
+        System.out.println();
+        
+        
+        System.out.print("Burger : $");
+        System.out.println(burger);
+        System.out.print("Fries : $");
+        System.out.println(fries);
+        System.out.print("Drinks : $");
+        System.out.println(drink);
+        
+        System.out.print("Food Total: $");
+        System.out.println(totalFood);
+        
+        System.out.print("Tax: $");
+        System.out.println(tax);
+        
+        System.out.print("Total Due: $");
+        System.out.println(totalDue);
+                
+        
+    } //end main
+    
+} //end class
