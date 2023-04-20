@@ -1,0 +1,218 @@
+package c.s.prog;
+
+import static java.lang.System.out;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author sowmya
+ */
+public class CSProg {
+     private static SLND<String> guests, victuals;
+    private static int cmdCount = 0;    // command counter
+    private static final Scanner cin = new Scanner(System.in);
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+         out.println("CPS 501 Assignment 2 by Group ____");
+	out.println("Group members are:");
+	out.println("First person's full name");
+//	out.println("Second person's full name");	// if team has 2 members	
+        tellPurpose();
+        guests = new SLND_ArrayList<>("Guest List");
+        victuals = new SLND_ArrayList<>("Food and Beverage List");
+        mainMenu();
+        out.println("\nFinal lists:\n");
+        out.println(guests);
+        out.println(victuals);
+        out.println("\nCPS 501 Assignment 2 complete");
+    } // end main
+
+    private static void mainMenu() {
+        char choice = mainMenuGetChoice();
+
+        while (choice != 'Q') {
+            switch (choice) {
+                case 'F':
+                    maintain(victuals);
+                    break;
+                case 'G':
+                    maintain(guests);
+                    break;
+                default:
+                    out.println("\n Invalid Choice!");
+                    break;
+            }
+        
+	    // TODO: call "maintain" with appropriate argument
+	    // or say that the choice is invalid
+
+            choice = mainMenuGetChoice();
+        } // end loop
+    } // end mainMenu
+
+    private static char mainMenuGetChoice() {
+        cmdCount++;
+        out.println("\nMaintain: F)ood and beverage list, or G)uest list, " + 
+                "or Q)uit the program");
+        out.print(cmdCount + ". Your choice (F/G/Q): ");
+        return cin.nextLine().toUpperCase().charAt(0);
+    } // end method
+
+    private static void maintain(SLND<String> theList) {
+        out.println("\nWorking with " + theList.name);
+        char choice = subMenuGetChoice();
+
+        while (choice != 'Q') {
+            switch (choice) {
+                case 'A':
+                    add(theList);
+                    break;
+                case 'F':
+                    find(theList);
+                    break;
+                case 'R':
+                    remove(theList);
+                    break;
+                default:
+                    out.println("Your choice is invalid!");
+                    break;
+            }
+            
+            
+	    // TODO: call appropriate client side method to handle user's choice
+	    // or say that the choice is invalid
+
+            choice = subMenuGetChoice();
+        } // end loop
+
+        out.println("Ended working with " + theList.name);
+    } // end method
+
+    private static char subMenuGetChoice() {
+        cmdCount++;
+        out.println("\nChoices: A)dd, F)ind, P)rint, R)emove, Q)uit");
+        out.print(cmdCount + ". Your choice (A/F/P/R/Q): ");
+        return cin.nextLine().toUpperCase().charAt(0);
+    } // end method
+
+    private static void add(SLND<String> theList) {
+        out.print("Add to " + theList.name + "? ");
+        String item = cin.nextLine();
+        if (theList.add(item)) {
+            out.println("Add succeeded");
+        } else {
+            out.println("Add failed");
+        }
+    } // end method
+
+    private static void find(SLND<String> theList) {
+        out.print("Find from" + theList.name + "?");
+        String item =cin.nextLine();
+        if (theList.find(item)){
+            out.println("Item found");
+        }
+        else {
+            out.println("Item not found");
+	// TODO: complete this method
+
+    }
+    }// end method
+
+    private static void remove(SLND<String> theList) {
+        out.print("Remove from" + theList.name + "?");
+        String item = cin.nextLine();
+        if(theList.remove(item)){
+            out.println("Item removed");
+        }
+        else {
+            out.println("Item not removed");
+        }
+	// TODO: complete this method
+
+    } // end method
+
+    private static void tellPurpose() {
+        out.println("Party Planner: This program lets you maintain" +
+                "\n\ta guest list and a food/beverage list");
+    } // end method
+
+} // end class
+
+// ----------------- abstract generic class SLND (Sorted List No Duplicates)
+// No changes needed here
+abstract class SLND<E extends Comparable<E>> {
+
+    public final String name;
+
+    public SLND(String name) {
+        this.name = name;
+    }
+
+    public abstract boolean add(E item);
+
+    public abstract boolean remove(E item);
+
+    public abstract boolean find(E item);
+
+    public abstract String toString();
+} // end class
+
+// ----------------- generic class SLND_ArrayList extends SLND
+class SLND_ArrayList<E extends Comparable<E>> extends SLND<E> {
+    private ArrayList<E> data;
+
+    public SLND_ArrayList(String name) {
+        super(name);
+        data = new ArrayList<>();
+    }    // Constructor
+
+    public boolean add(E item) {
+        int index = data.indexOf(item);
+        if (index == -1)
+                {
+                    data.add(item);
+                    return true;
+                }
+	// TODO: complete this method, may need local variables
+
+        return false; // stub
+    } // end method
+    
+    public boolean remove(E item) {
+	// TODO: complete this method, may need local variables
+        if (data.contains(item)){
+            int ind = data.indexOf(item);
+            data.remove(ind);
+            return true;
+        }
+        
+
+        return false; // stub
+    } // end method
+
+    public boolean find(E item) {
+        if (data.contains(item))
+        {
+            return true;
+        }
+	// TODO: complete this method, may need local variables
+
+        return false; // stub
+    } // end method
+
+    public String toString() {
+	// TODO: complete this method, may need local variables
+        String list = data.toString();
+        return list;
+//        return "Empty List\n"; 
+    } // end method
+
+    // add any private methods you want
+    
+        // TODO code application logic here
+    }
+    
