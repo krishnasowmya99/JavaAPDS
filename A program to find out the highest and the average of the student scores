@@ -1,0 +1,86 @@
+// Course:  CPS 501
+// Semester: 2021 Fall
+// Name: SOWMYA KOTHWALGUDEM
+// Section: 10
+// Assignment: LAB 04
+// Purpose: A program to find out the highest and the average of the student scores.
+// Date completed: 10/16/2021
+package lab04;
+import static java.lang.System.out;
+import java.util.Scanner;
+
+/**
+ *
+ * @author sowmya
+ */
+public class Lab04 {
+
+    /**
+     * @param args the command line arguments
+     */
+    
+    // class-wide (global/shared) variable accessible in all methods
+    static int sumSoFar = 0, maxSoFar = 0;
+    static final int CLASS_SIZE = 5;    // number of students in class
+
+    static final Scanner cin = new Scanner(System.in);
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // sign-on
+        out.println("CPS 501 Lab 04 by SOWMYA KOTHWALGUDEM \n");
+
+        // variable definitions
+        int studentNo = 1;        // the student number being processed
+
+        while (studentNo <= CLASS_SIZE) {
+            processStudent(studentNo);    // method call to process one student
+
+            // DO NOT ADD ANY LINES BELOW THIS COMMENT AND BEFORE LOOP END
+            studentNo++;   // uncomment in step 6
+        } // end loop
+
+        displayResults();
+
+        // sign off
+        out.println("\nLab 04 complete");
+    } // end main
+
+    static void processStudent(int studentNo) {
+        int testScore = 0;      // variable for input 
+
+        testScore = getInt("Enter test score for student " + studentNo + ": ");
+
+        // echo print
+        out.println("Student number " + studentNo + ", score is " + testScore);
+
+        // TODO: modify the following line to update sumSoFar correctly (step 8)
+        sumSoFar = sumSoFar + testScore;
+
+        // TODO: Modify the following lines to update maxSoFar correctly (step 9)
+        if (testScore>maxSoFar) {
+            maxSoFar = testScore;
+        }
+    } // end method
+    
+    static void displayResults() {
+        double average = 0;
+
+        // calculate average
+        average = sumSoFar / CLASS_SIZE;
+
+        // Output final results
+        out.println("\nSummary" + "\nNumber of students = " + CLASS_SIZE
+                + ", Average score = " + average + ", Highest score = "
+                + maxSoFar);
+    } // end method
+
+    static int getInt(String prompt) {
+        out.print(prompt);
+        return cin.nextInt();
+    } // end getInt
+
+    
+}
