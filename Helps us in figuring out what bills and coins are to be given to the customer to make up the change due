@@ -1,0 +1,155 @@
+// Course:  CPS 501
+// Semester: 2021 Fall
+// Name: SOWMYA KOTHWALGUDEM
+// Section: 10
+// Assignment: 03
+// Purpose: Helps us in figuring out what bills and coins are to be given to the customer to make up the change due.
+// Date completed: 09/21/2021
+package asgn01_changemaker;
+
+import static java.lang.System.out;
+import java.util.Scanner;
+
+/**
+ *
+ * @author sowmya
+ */
+public class Asgn01_changeMaker {
+static final Scanner cin = new Scanner(System.in);
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       // declare double variable to hold input data
+      
+
+        // declare int variables to hold whole dollars and cents
+//        int dollar=0;
+//        int cents=0;
+
+        // Output identification
+        out.print("CPS 501 Assignment 1 by SOWMYA KOTHWALGUDEM \n\n");
+
+        // Describe the program's purpose on output
+        out.println("This program will help you make the change due to the customer");
+        
+        // dialog with user
+//         double change_tobe_given=cin.nextDouble();
+//        out.println("Enter change due:(dollars.cents):"+change_tobe_given);
+         double change_tobe_given=getDouble("Enter change due:(dollars.cents):");
+
+        // spacing to separate input data and output results
+        out.println();
+
+        // calculate numbers of dollars and cents in the change
+         int dollar=(int) change_tobe_given;
+         double cents= (change_tobe_given-dollar)*100;
+         int cent=(int) Math.round(cents);
+
+        // Result heading
+        out.println("Make change of "+change_tobe_given+"$"+"by:");
+	// call the methods showDollars and showCents
+        showDollars(dollar);
+        showCents(cent);
+
+        // Sign off
+        out.print("\nGoodbye\n");
+    } // end main
+    
+    static void showDollars(int dollars) {
+        // declare variables to holds the numbers 
+        // of bills of different denominations (int)
+        int change=0;
+        
+        int twenty=dollars/20;
+        change=dollars%20;
+        showNumberAndName(twenty,"Jackson");
+        
+        if (change<20){
+            int ten=change/10;
+            change=change%10;
+            showNumberAndName(ten,"Hamilton");
+        }
+        if (change<10){
+            int five=change/5;
+            change=change%5;
+            showNumberAndName(five,"Lincoln");
+           
+        }
+        
+        int ones=change;
+        showNumberAndName(ones,"Washington");
+        
+        
+        
+
+        // calculate numbers of various bills needed
+
+	// call method showNumberAndName for each bill type
+
+    } // end showDollars
+    
+    static void showCents(int cents) {
+        // declare variables to holds the numbers 
+        int rem=0;
+        
+        int quarters=cents/25;
+        rem=cents%25;
+        showNumberAndName(quarters,"Quarter");
+        
+        if (rem<25){
+            int dimes= rem/10;
+            rem=rem%10;
+            showNumberAndName(dimes,"Dime");
+            
+        }
+        
+        if(rem<10){
+            int nickels=rem/5;
+            rem=rem%5;
+            showNumberAndName(nickels,"Nickel");
+        }
+        
+        int penny=rem;
+        showNumberAndName(penny,"Penny");
+        // of coins of different denominations (int)
+
+        // calculate numbers of coins needed
+
+	// call method showNumberAndName for each coin type
+
+    } // end showCents
+    
+    static void showNumberAndName(int number, String name) {
+        // do nothing if number <= 0
+        if(number==1){
+            out.println(number+" "+name);
+        }
+        else if(number>1){
+            out.println(number+" "+plural(name));
+        }
+
+        // print number and name (use plural form if needed)
+
+    } // end showNumberAndName
+
+    static String plural(String name) {
+	// stub (to avoid compiler complaints)
+        if (name.endsWith("y")){
+                name="Pennies";
+        }
+        else {
+            name=(name+"s");
+        }
+	return name;
+        
+    } // end plural
+
+    // utility method getDouble
+    static double getDouble(String prompt) {
+        out.print(prompt);
+        return cin.nextDouble();
+    } // end method
+ }
+    
+
