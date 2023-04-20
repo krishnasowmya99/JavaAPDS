@@ -1,0 +1,82 @@
+// Course:  CPS 501
+// Semester: 2021 Fall
+// Name: SOWMYA KOTHWALGUDEM
+// Section: 10
+// Assignment: 02
+// Purpose: A basic program to calculate weekly gross pay for several employees
+// Date completed: 09/05/2021
+package kothwalgudems1_lab2;
+
+import static java.lang.System.out;
+import java.util.Scanner;
+
+/**
+ *
+ * @author sowmya
+ */
+public class Kothwalgudems1_Lab2 {
+
+   final static Scanner cin = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        // output identification
+        out.println("CPS 501 Lab 2 by SOWMYA KOTHWALGUDEM!\n");
+
+        double hours, payRate;	// obvious
+
+        hours = getDouble("Enter hours worked: ");
+        payRate = getDouble("Enter pay rate: ");
+
+        // TODO: modify argument order in part 1
+        calculatePay(hours,payRate);
+
+        // sign off
+        out.print("\nCPS 501 Lab 2 complete\n\n");
+
+    } // end main
+
+    // DO NOT modify this method header 
+    static void calculatePay(double hours, double payRate) {
+        final double OT_THRESHOLD = 40; // hours > 40 earns overtime
+        final double OT_FACTOR = 1.5;   // time and half for overtime
+        
+        double regularPay = 0, overtimePay = 0, totalPay = 0.0;
+
+        // echo-print parameters. 
+        // TODO: Comment out following 2 lines in part 2
+//        out.println("\ncalculatePay: hours = " + hours
+//                + ", pay rate = " + payRate);
+
+        // TODO: calculate regular and overtime pay 
+        // (in part 2, change the condition and formulas where necessary)
+        if (hours >OT_THRESHOLD) {
+            regularPay = OT_THRESHOLD*payRate;
+            overtimePay = (hours-OT_THRESHOLD)*payRate*OT_FACTOR;
+        } else {
+            regularPay = hours*payRate;
+            overtimePay = 0;
+        } // end if
+
+        totalPay = regularPay+overtimePay;		// TODO: correct the formula (part 2)
+
+        // display results
+        displayResults(regularPay, overtimePay, totalPay);
+    } // end function
+
+    static void displayResults(double regularPay, double overtimePay,
+            double totalPay) {
+        out.println("\nRegular pay = " + regularPay + ", Overtime pay = "
+                + overtimePay + ", Total pay = " + totalPay);
+    } // end method
+
+    static int getInt(String prompt) {
+        out.print(prompt);
+        return cin.nextInt();
+    } // end method
+
+    static double getDouble(String prompt) {
+        out.print(prompt);
+        return cin.nextDouble();
+    } // end method
+    
+}
