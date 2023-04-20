@@ -1,0 +1,152 @@
+package asgn02_rockpapersci;
+
+import static java.lang.System.out;
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ *
+ * @author sowmya
+ */
+public class Asgn02_RockPaperSci {
+
+    /**
+     * @param args the command line arguments
+     */
+     static final Random rand = new Random();
+    static final Scanner cin = new Scanner(System.in);
+    static final int ROUNDS = 10;
+
+    // choices to pick from
+    static final int ROCK = 1, PAPER = 2, SCISSORS = 3;
+    // results from one round of play
+    static final int COMPUTER_WIN = 1, PLAYER_WIN = 2, TIE = 3;
+
+    // String arrays to translate numbers to word desriptions
+    static final String[] CHOICE_NAMES = {"", "Rock", "Paper", "Scissors"};
+    static final String[] OUTCOME_NAMES = {"", "Computer win", "Player win", "Tie"};
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        // display sign-on message
+        out.println("CPS 501 Assignment 2 by SOWMYA KOTHWALGUDEM\n\n");
+
+	// greet human player
+        out.println("Hello! Lets play rock-paper-scissors for 10 rounds");
+	// seed the random number generator using input from user
+//        out.print("To set things up, please enter a positive integer: ");
+//        final int seed = cin.nextInt();
+//        rand = new Random(seed);
+//        out.println();
+
+        // declare/initialize all primitive type and array reference variables
+        int[] playerChoices = new int[10];
+    int[] computerChoices = new int[10];
+    int[] roundResults = new int[10];
+    int numPlayerWins = 0;
+    int numComputerWins = 0;
+    int numTies = 0;
+
+
+	// The loop starts here
+        for(int i=0;i<ROUNDS;i++){
+      int playerChoice = getPlayerChoice();
+      int computerChoice = rand.nextInt(3) + 1;
+      int roundResult = getRoundResult(computerChoice, playerChoice);
+      playerChoices[i] = playerChoice;
+      computerChoices[i] = computerChoice;
+      roundResults[i] = roundResult;
+      switch (roundResult) {
+        case 2:
+          numPlayerWins++;
+          break;
+        case 1:
+          numComputerWins++;
+          break;
+        case 3:
+          numTies++;
+          break;
+
+           
+        }
+
+	// end loop
+
+	// call the showGameResults method
+
+	// display final summary from 10 rounds
+
+	// sign-off
+              showRoundResult(computerChoice, playerChoice, roundResult);
+      System.out.println();
+    }
+    showGameResults(computerChoices, playerChoices, roundResults);
+    System.out.println();
+    System.out.println("Let's see how we did:");
+    System.out.println("You won " + numComputerWins + " rounds and I won " + numPlayerWins + ". " + numTies + " rounds were tied");
+    System.out.println();
+    if (numPlayerWins > numComputerWins) {
+      System.out.println("Hurray for me! I'm the champ!");
+    } else if (numPlayerWins < numComputerWins) {
+      System.out.println("Congratulations, you are the champ!");
+    } else {
+      System.out.println("We're in a tie, let's play again soon!");
+    }
+    System.out.println();
+    System.out.println("CPS 150 Assignment 5 complete");
+  
+
+       out.print("\nCPS 501 Assignment 2 complete\n\n");
+    } // end main
+
+    static int getPlayerChoice() {
+	// stub code
+           while (true) {
+      System.out.print("Pick 1 (Rock), 2 (Paper), 3 (Scissors): ");
+      int option = cin.nextInt();
+      if (option == 1 || option == 2 || option == 3)
+        return option;
+      System.out.println("Error: Invalid choice.");
+    }
+
+    } // end getPlayerChoice
+
+    static int getRoundResult(final int computerChoice, final int playerChoice) {
+	    if (playerChoice == computerChoice)
+      return 3;
+    if ((playerChoice == 1 && computerChoice == 3) || (playerChoice == 3 && computerChoice == 2) || (playerChoice == 2 && computerChoice == 1))
+      return 2;
+    return 1;
+
+    } // end getRoundResult
+
+    static void showRoundResult(final int computerChoice, final int playerChoice,
+            final int roundResult) {
+	// stub code
+	    switch (roundResult) {
+      case 3:
+        System.out.println("I chose " + CHOICE_NAMES[playerChoice] + " too, so we tied.");
+        return;
+      case 2:
+        System.out.println("I chose " + CHOICE_NAMES[playerChoice] + ", so I win! " + CHOICE_NAMES[playerChoice] + " beats " + CHOICE_NAMES[computerChoice]);
+        return;
+    }
+    System.out.println("I chose " + CHOICE_NAMES[playerChoice] + ", so you win! " + CHOICE_NAMES[computerChoice] + " beats " + CHOICE_NAMES[playerChoice]);
+
+    } // end showRoundResult
+
+    static void showGameResults(int[] computerChoices,
+            int[] playerChoices, int[] results) {
+
+	// stub code
+	    System.out.println("Game results");
+    System.out.println("============");
+    System.out.printf("%-5s %-13s %-14s %-11s\n", new Object[] { "Round", "Player choice", "Computer choice", "Round result" });
+    System.out.printf("%-5s %-13s %-14s %-11s\n", new Object[] { "-----", "-------------", "---------------", "------------" });
+    for (int i = 0; i < results.length; i++) {
+      System.out.printf("%5d %-13s %-14s %-11s\n", new Object[] { Integer.valueOf(i + 1), CHOICE_NAMES[playerChoices[i]], CHOICE_NAMES[computerChoices[i]], OUTCOME_NAMES[results[i]] });
+    }
+
+    } // end showGameResults
+    }
+    
